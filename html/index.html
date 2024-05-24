@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeInspector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px;
+            border: 1px solid #333;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+        }
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .header-image img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .text-content {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .upload-container {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .upload-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .upload-container img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .images {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .images img {
+            width: 30%;
+            height: auto;
+            object-fit: contain;
+        }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .title {
+                font-size: 24px;
+                text-align: center;
+            }
+            .images {
+                flex-direction: column;
+                align-items: center;
+            }
+            .images img {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="img/logo.png" alt="Logo">
+            </div>
+            <div class="title">POKEINSPECTOR</div>
+        </div>
+        <div class="header-image">
+            <img src="img/banner.jpg" alt="Header Image">
+        </div>
+        <div class="text-content">
+            <p>PokeInspector é um sistema inovador de avaliação de cartas Pokémon que utiliza inteligência artificial para fornecer análises precisas e detalhadas das suas coleções. Com uma interface intuitiva e fácil de usar, o PokeInspector permite que os usuários escaneiem e façam upload de suas cartas, que são então processadas e avaliadas com base em diversos critérios, incluindo raridade, condição e valor de mercado. O sistema também oferece recomendações sobre como melhorar a coleção e insights sobre as tendências do mercado de cartas Pokémon.</p>
+        </div>
+        <div class="upload-container">
+            Arraste e solte uma imagem aqui ou clique para fazer o upload
+            <input type="file" accept="image/*" id="fileInput">
+            <img id="uploadedImage" alt="Uploaded Image">
+        </div>
+        <div class="button-container">
+            <button onclick="inspectImage()">Inspecionar</button>
+        </div>
+        <div class="images">
+            <img src="img/carta1.jpg" alt="Image 1">
+            <img src="img/carta2.jpg" alt="Image 2">
+            <img src="img/carta3.jpg" alt="Image 3">
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.upload-container input[type="file"]').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('uploadedImage');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    document.querySelector('.upload-container').innerText = '';
+                    document.querySelector('.upload-container').appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function inspectImage() {
+            alert('Inspecionando imagem...');
+        }
+    </script>
+</body>
+</html>
